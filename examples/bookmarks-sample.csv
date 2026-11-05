@@ -1,0 +1,18 @@
+# A starter bookmarks file for GQRX, in the exact
+# format the program writes (chapter 7). Copy to
+# ~/.config/gqrx/bookmarks.csv while GQRX is closed,
+# then edit the names and frequencies to your own.
+# Frequencies in Hz; modulation in the remote
+# protocol's spelling; bandwidth in Hz.
+
+# Tag name          ;  color
+Untagged            ; #c0c0c0
+Broadcast           ; #00c000
+Amateur             ; #c00000
+
+# Frequency ; Name                     ; Modulation          ;  Bandwidth; Tags
+     98500000; Example FM station       ; WFM_ST              ;     200000; Broadcast
+    118100000; Example airband frequency; AM                  ;      10000; Untagged
+    162550000; Weather broadcast example; FM                  ;      15000; Untagged
+    146520000; 2 m calling frequency    ; FM                  ;      15000; Amateur
+     14250000; 20 m SSB calling area    ; USB                 ;       2700; Amateur

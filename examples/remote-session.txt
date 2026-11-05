@@ -1,0 +1,92 @@
+A remote-control session with GQRX 2.17.4,
+captured in the lab
+========================================================================
+
+Setup: Tools > Remote control switched on in the
+program (port 7356, allowed hosts 127.0.0.1, both
+as shipped). Input device: the lab file (two
+tones at +120 kHz and -200 kHz around a 14.236 MHz
+centre). Commands were sent one at a time, each
+reply awaited — a single burst of all of them
+down a fresh connection drew only the first
+reply before the pipe closed, which is why this
+session is paced.
+
+Lines starting with ">" are what was sent; the
+rest is what GQRX answered.
+
+> _
+Gqrx 2.17.4
+
+> f
+14236000
+                            the demodulator
+                            frequency, in Hz
+> m
+AM
+10000
+                            mode, then passband
+                            in Hz
+> M ?
+OFF RAW AM AMS LSB USB CWL CWR CWU CW FM WFM WFM_ST WFM_ST_OIRT
+
+> l STRENGTH
+-51.2
+                            dBFS, demodulator
+                            parked on noise
+> F 14356000
+RPRT 0
+                            set the frequency:
+                            onto the strong tone
+                            (14.236 MHz + 120 kHz)
+> f
+14356000
+
+> l STRENGTH
+-6.0
+                            the tone's amplitude
+                            is 0.5, and
+                            20 * log10(0.5) = -6.02
+> M USB 2400
+RPRT 0
+
+> m
+USB
+2400
+
+> L SQL -60
+RPRT 0
+
+> l SQL
+-60.0
+
+> u DSP
+1
+                            1 = the receiver is
+                            running
+> l ?
+SQL STRENGTH AF
+                            the settings this
+                            device offers to read;
+                            a file has no gains,
+                            so no *_GAIN entries
+> L ?
+SQL AF
+
+> q
+                            (connection closed)
+
+A separate short session started and stopped the
+audio recorder the same way:
+
+> U RECORD 1
+RPRT 0
+> u RECORD
+1
+> U RECORD 0
+RPRT 0
+
+and the program's log carried the receipt:
+
+Recording audio to /home/<lab>/gqrx_20261105_084908_14356000.wav
+Audio recorder stopped

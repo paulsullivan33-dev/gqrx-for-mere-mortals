@@ -1,0 +1,22 @@
+site_name: GQRX for Mere Mortals
+site_description: Plain-language listening with the GQRX software-defined radio receiver. The window and its dials, a receiver configured and run from a recording when there is no dongle, the everyday listening workflows, audio and I/Q recordings you can replay, bookmarks in a plain-text file, and a remote control you can script.
+site_url: https://paulsullivan33-dev.github.io/gqrx-for-mere-mortals/
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What GQRX Is: what-gqrx-is.md
+  - Installing GQRX: installing-gqrx.md
+  - The Main Window: the-main-window.md
+  - Configuring a Receiver: configuring-a-receiver.md
+  - Listening Workflows: listening-workflows.md
+  - Recording and Remote Control: recording-and-remote-control.md
+  - Bookmarks and the Bandplan: bookmarks-and-bandplan.md
+  - The Neighbours: the-neighbours.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md

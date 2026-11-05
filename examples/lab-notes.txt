@@ -1,0 +1,80 @@
+The lab — one synthetic recording, no antenna, no sound card
+========================================================================
+
+This guide's lab is a file of samples that was
+never in the air, plus a build machine with no
+receiver and no audio device attached. Both
+halves are deliberate, and both are stated here
+so nothing in the chapters can pretend
+otherwise.
+
+THE RECORDING
+--------------------
+tone.cf32 — four seconds of complex float32
+I/Q at 1,000,000 samples per second, made by
+make-lab-file.py (beside this note): a tone of
+amplitude 0.5 at +120,000 Hz and a tone of
+amplitude 0.15 at -200,000 Hz over light
+Gaussian noise. 32,000,000 bytes, 4,000,000
+samples. Regenerate it with:
+
+    python3 make-lab-file.py
+
+The generator is seeded, so your copy is
+byte-identical to the guide's. Everything the
+chapters verify by measurement rests on those
+two tones and two sums:
+
+    20 * log10(0.5)        = -6.02 dBFS
+        (the strong tone, as STRENGTH reads it)
+    20 * log10(0.15 / 0.5) = -10.46 dB
+        (the weak tone, relative to the strong
+        one, in an FFT of GQRX's own recording)
+
+THE BUILD MACHINE
+--------------------
+Ubuntu 24.04 under a virtual display (Xvfb),
+no RTL-SDR dongle, no antenna, no sound card.
+Packages installed from the Ubuntu archive
+purely to be run:
+
+    gqrx-sdr    2.17.4-2build3
+    gnuradio    3.10.9.2-1.1ubuntu2
+    gr-osmosdr  0.2.0 (as the program reports)
+
+GQRX was launched and driven through its own
+menus and dialogs with synthetic input events;
+screenshots were the working captures. Its
+audio went to a PulseAudio null sink
+(module-null-sink) after its first, captured
+refusal to start without one: audio was
+routed, counted, and recorded — never heard,
+because there was nothing to hear it with.
+
+GQRX's input for the whole session was the
+recording above, through its own file device:
+
+    file=/tmp/tone.cf32,freq=100e6,rate=1e6,repeat=true,throttle=true
+
+CONSEQUENCES, STATED ONCE
+--------------------
+No signal was received over the air at any
+point in this build, and no chapter reports
+one. The chapters teach from the captures what
+can honestly be taught from them — the
+window's anatomy, the dialogs, the protocol,
+the recorders' outputs measured afterwards —
+and mark the rest (real reception, hardware
+gain controls, RDS decoding, the UDP stream,
+the other platforms) as documented-only.
+criteria.md keeps the full ledger.
+
+One housekeeping note: a second application
+shared the build's virtual display and twice
+took the keyboard focus, so two clicks meant
+for menus landed on GQRX's spectrum instead
+and retuned it (14.2885 MHz, then 14.3382 MHz).
+The chapters report both where they matter —
+one of them is preserved forever in the lab's
+only bookmark — rather than tidying them out
+of the record.

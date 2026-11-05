@@ -1,0 +1,79 @@
+GQRX commands — the everyday set
+from "GQRX for Mere Mortals"
+========================================================================
+
+Every behaviour quoted in the guide was captured
+on a receiver-less, sound-card-less Ubuntu 24.04
+machine: gqrx-sdr 2.17.4, GNU Radio 3.10.9,
+gr-osmosdr 0.2.0, the program fed with a
+synthetic file (see lab-notes.txt) and driven
+through its own GUI and remote-control port.
+
+
+INSTALL AND FIRST RUN
+--------------------
+sudo apt install gqrx-sdr
+                            the whole install on
+                            Debian/Ubuntu
+volk_profile                benchmark GNU Radio's
+                            kernels once, before the
+                            first long session (the
+                            manual page's advice)
+gqrx                        first run opens Configure
+                            I/O devices; later runs
+                            open the window directly
+
+
+CONFIGURATIONS
+--------------------
+gqrx --list                 list the configurations in
+                            ~/.config/gqrx/
+gqrx -c lab.conf            start with a chosen one
+gqrx -e                     open it in the device
+                            dialog first
+gqrx -r                     reset it
+
+
+THE LAB INPUT (a file standing in for a receiver)
+--------------------
+Device string, entered in File > I/O Devices:
+file=/path/to/tone.cf32,freq=100e6,rate=1e6,repeat=true,throttle=true
+
+Make the file itself with make-lab-file.py,
+beside this note.
+
+
+REMOTE CONTROL (Tools > Remote control switches
+it on; port 7356, this machine only, as shipped)
+--------------------
+One command per line over TCP. Send them one at
+a time and wait for each reply — a single burst
+down a fresh connection drew only the first
+reply in the lab. Full session:
+remote-session.txt, beside this note.
+
+f                           demodulator frequency [Hz]
+F 14356000                  set it
+m / M USB 2400              mode and passband
+M ?                         list the mode codes
+l STRENGTH                  channel strength [dBFS]
+L SQL -60                   set the squelch
+u DSP / U DSP 1             receiver running? / start
+U RECORD 1                  start the audio recorder
+q                           close the connection
+
+A taste, with netcat:
+printf 'f\n' | nc -q 2 127.0.0.1 7356
+
+
+RECORDINGS (written to your home directory)
+--------------------
+Audio (Audio dock > Rec):
+    gqrx_20261105_084908_14356000.wav
+    date, time, demodulator Hz; 48 kHz 16-bit
+    stereo WAV, 192,000 bytes a second
+
+I/Q (Tools > I/Q recorder, Ctrl+I):
+    gqrx_20261105_084953_100000000_1000000_fc.raw
+    date, time, input centre Hz, sample rate;
+    raw complex float32, rate x 8 bytes a second
